@@ -5,14 +5,17 @@
               directory with the processing instruction <?eclipse.ant.import?>
               as the first entry and export the buildfile again. --><project basedir="." default="build" name="MyTest">
     <property environment="env"/>
+		<!--
     <property name="ECLIPSE_HOME" value="../../../bin/eclipse"/>
+		-->
     <property name="junit.output.dir" value="junit"/>
     <property name="debuglevel" value="source,lines,vars"/>
     <property name="target" value="1.6"/>
     <property name="source" value="1.6"/>
+		<property name="junit" location="${ant.home}/lib/ant-junit.jar"/>
     <path id="JUnit 4.libraryclasspath">
-        <pathelement location="${ECLIPSE_HOME}/plugins/org.junit_4.10.0.v4_10_0_v20120426-0900/junit.jar"/>
-        <pathelement location="${ECLIPSE_HOME}/plugins/org.hamcrest.core_1.1.0.v20090501071000.jar"/>
+        <pathelement location="lib/junit-4.11.jar"/>
+				<pathelement location="lib/hamcrest-core-1.3.jar"/>
     </path>
     <path id="MyTest.classpath">
         <pathelement location="bin"/>
@@ -46,6 +49,7 @@
         </javac>
     </target>
     <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
+		<!--
     <target description="copy Eclipse compiler jars to ant lib directory" name="init-eclipse-compiler">
         <copy todir="${ant.library.dir}">
             <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
@@ -59,6 +63,7 @@
         <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
         <antcall target="build"/>
     </target>
+		-->
     <target name="Main">
         <java classname="com.evgeny.exercises.mytest.Main" failonerror="true" fork="yes">
             <classpath refid="MyTest.classpath"/>
